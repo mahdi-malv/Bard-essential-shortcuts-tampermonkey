@@ -40,33 +40,37 @@ A fully complete explanation on how to make coffee with providing all the detail
 Understood. I will follow your instructions and adjust the depth and preciseness of my responses based on the level you specify in each prompt. Please feel free to ask me anything you like, and I will do my best to provide you with an informative and engaging conversation.
 `;
 
+function inputField() {
+  return document.getElementsByClassName("ql-editor ql-blank textarea")[0]
+}
+
 (function () {
   "use strict";
   document.addEventListener("keydown", function (event) {
-    let inputField = document.querySelector(
-      "body > chat-app > side-navigation > mat-sidenav-container > mat-sidenav-content > main > chat-window > div.chat-container.ng-tns-c1385467139-2.ng-star-inserted.at-least-desktop-small > div.bottom-container.ng-tns-c1385467139-2.narrow-container.ng-star-inserted > div.input-area-container.ng-tns-c1385467139-2 > input-area > div > div.text-input-field.ng-tns-c3294528854-5.ng-star-inserted > div > div > div > rich-textarea"
-    );
     if (
       event.metaKey &&
       event.shiftKey &&
       (event.key === "O" || event.key === "o")
     ) {
+      console.log("Creating new conversation");
       document.querySelector(".new-conversation").click();
-      inputField.focus();
+      inputField().focus();
     } else if (event.shiftKey && event.key === "Escape") {
-      inputField.focus();
+      console.log("Focusing on the input");
+      inputField().focus();
     } else if (
       event.metaKey &&
       event.shiftKey &&
       (event.key === "u" || event.key === "U")
     ) {
-      inputField.focus();
+      console.log("Multilevel new conversation");
+      inputField().focus();
       let inputTextArea = document.querySelector("body > chat-app > side-navigation > mat-sidenav-container > mat-sidenav-content > main > chat-window > div.chat-container.ng-tns-c1385467139-2.ng-star-inserted.at-least-desktop-small > div.bottom-container.ng-tns-c1385467139-2.narrow-container.ng-star-inserted > div.input-area-container.ng-tns-c1385467139-2 > input-area > div > div.text-input-field.ng-tns-c3294528854-5.ng-star-inserted > div > div > div > rich-textarea > div.ql-editor.textarea.ql-blank > p")
       inputTextArea.innerText = multiLevelInstruction;
       setTimeout(function() {
         document.querySelector("body > chat-app > side-navigation > mat-sidenav-container > mat-sidenav-content > main > chat-window > div.chat-container.ng-tns-c1385467139-2.ng-star-inserted.at-least-desktop-small > div.bottom-container.ng-tns-c1385467139-2.narrow-container.ng-star-inserted > div.input-area-container.ng-tns-c1385467139-2 > input-area > div > div.send-button-container.ng-tns-c3294528854-5.outer.ng-star-inserted > button > span.mat-mdc-button-persistent-ripple.mdc-icon-button__ripple")
           .click()
-        inputField.focus();
+        inputField().focus();
       }, 200);
     }
   });
