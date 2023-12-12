@@ -2,8 +2,8 @@
 // @name        Bard Chat Initiator
 // @namespace   https://tampermonkey.net/
 // @description Adds a button to initialize Bard chat with a specific instruction.
-// @version     1.0
-// @author      Bard
+// @version     1.2
+// @author      mahdi-malv
 // @match       https://bard.google.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=google.com
 // @grant       none
@@ -41,7 +41,12 @@ Understood. I will follow your instructions and adjust the depth and preciseness
 `;
 
 function inputField() {
-  return document.getElementsByClassName("ql-editor ql-blank textarea")[0]
+  return document.getElementsByClassName("ql-editor textarea")[0]
+}
+
+function newChatButton() {
+    if (document.getElementsByClassName("new-conversation")[0]) return document.getElementsByClassName("new-conversation")[0]
+    else return document.querySelector('[aria-label="New chat"]')
 }
 
 (function () {
@@ -53,7 +58,7 @@ function inputField() {
       (event.key === "O" || event.key === "o")
     ) {
       console.log("Creating new conversation");
-      document.querySelector(".new-conversation").click();
+      newChatButton().click();
       inputField().focus();
     } else if (event.shiftKey && event.key === "Escape") {
       console.log("Focusing on the input");
@@ -64,14 +69,13 @@ function inputField() {
       (event.key === "u" || event.key === "U")
     ) {
       console.log("Multilevel new conversation");
+      newChatButton().click();
       inputField().focus();
-      let inputTextArea = document.querySelector("body > chat-app > side-navigation > mat-sidenav-container > mat-sidenav-content > main > chat-window > div.chat-container.ng-tns-c1385467139-2.ng-star-inserted.at-least-desktop-small > div.bottom-container.ng-tns-c1385467139-2.narrow-container.ng-star-inserted > div.input-area-container.ng-tns-c1385467139-2 > input-area > div > div.text-input-field.ng-tns-c3294528854-5.ng-star-inserted > div > div > div > rich-textarea > div.ql-editor.textarea.ql-blank > p")
-      inputTextArea.innerText = multiLevelInstruction;
+      inputField().innerText = multiLevelInstruction;
       setTimeout(function() {
-        document.querySelector("body > chat-app > side-navigation > mat-sidenav-container > mat-sidenav-content > main > chat-window > div.chat-container.ng-tns-c1385467139-2.ng-star-inserted.at-least-desktop-small > div.bottom-container.ng-tns-c1385467139-2.narrow-container.ng-star-inserted > div.input-area-container.ng-tns-c1385467139-2 > input-area > div > div.send-button-container.ng-tns-c3294528854-5.outer.ng-star-inserted > button > span.mat-mdc-button-persistent-ripple.mdc-icon-button__ripple")
-          .click()
-        inputField().focus();
-      }, 200);
+          document.querySelector('[aria-label="Send message"]').click();
+          inputField().focus()
+      }, 250);
     }
   });
 })();
