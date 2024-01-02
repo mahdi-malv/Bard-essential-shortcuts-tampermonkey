@@ -76,6 +76,22 @@ function newChatButton() {
           document.querySelector('[aria-label="Send message"]').click();
           inputField().focus()
       }, 250);
+    } else if (
+      event.metaKey &&
+      event.shiftKey &&
+      (event.key === "Backspace")
+    ) {
+      // Last chat dot menu
+      const dotMenu = document.querySelector('[aria-label="Open menu for conversation actions."]');
+      dotMenu.click();
+      setTimeout(function() {
+        let deleteButton = document.querySelector('[data-test-id="delete-button"]');
+        deleteButton.click();
+        setTimeout(function() {
+          let confirm = document.querySelector('[data-test-id="confirm-button"]');
+          confirm.focus();
+      }, 100);
+    }, 200);
     }
   });
 })();

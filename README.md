@@ -6,6 +6,7 @@ Some shortcuts in ChatGPT are very useful. I need them in Bard 🙂
 - `⌘+Shift+O`: Create a new chat
 - `Shift+Escape`: Focus on the input field
 - `⌘+Shift+U`: New chat + Focus on the input + Enter a multi-level pre instruction
+- `⌘+Shift+⌫`: Bring the "Remove current chat" dialog and focus on the `Confirm` button (Simillar to OpenAI shortcut)
 
 ### Usage
 1. Install TamperMonkey extension
